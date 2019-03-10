@@ -29,20 +29,13 @@ public class USACO {
     	}
 	public void nextMove() {
 	    if (grid.hasNextInt()) {
-		// System.out.println(grid.nextInt());
-		// System.out.println(grid.nextInt());
-		// System.out.println(grid.nextInt());
 		R_s = grid.nextInt()-1;
 		C_s = grid.nextInt()-1;
 		D_s = grid.nextInt();
-		// System.out.println(R_s);
-		// System.out.println(C_s);
-		// System.out.println(D_s);
 	    }
 	}
 	public void solve(int instruction) {
 	    if (instruction < N) {
-		System.out.println(toString());
 		int max = 0;
 		int num = grounds[R_s][C_s];
 		for(int i = 0; i < 3; i++) {
@@ -59,7 +52,6 @@ public class USACO {
 			}
 		    }
 		}
-		System.out.println(toString());
 		nextMove();
 		solve(instruction+1);
 	    }
@@ -77,16 +69,6 @@ public class USACO {
 	    }
 	    return summation*72*72;
 	}
-	//    public int row() {
-	// 	return R_s;
-	//     }
-	//     public int col() {
-	// 	return C_s;
-	//     }
-	//     public int indent() {
-	// 	return D_s;
-	//     }
-	// }
        public String toString() {
 	    String output = "";
 	    for(int i = 0; i < grounds.length; i++) {
@@ -103,7 +85,41 @@ public class USACO {
 	blank.solve(0);
 	return blank.volume();
     }
-
+    public static int silver(String filename) {
+        int[] possibleX = {0,0,-1,1};
+	int[] possibleY = {1,-1,0,0};
+	File f = new File(filename);
+	Scanner g = new Scanner(f);
+	int N = g.nextInt();
+	int M = g.nextInt();
+	int T = g.nextInt();
+	int[][] grid = new int[N][M];
+	for(int i = 0; i < N; i++) {
+	    for(int j = 0; j < M; j++) {
+		if (grid.next() == ".") {
+		    grid[i][j] = 1;
+		} else {
+		    grid[i][j] = -1;
+		}
+	    }
+	}
+	int count = 0;
+	R1 = grid.nextInt();
+	C1 = grid.nextInt();
+	R2 = grid.nextInt();
+	C2 = grid.nextInt();
+	for(int i = 0; i < T; i++) {
+	    for(int j = 0; j < possibleMoves; j++
+	    count += check(R1,C1,grid);
+	}
+    }
+    public int check(int row, int col, int[][] grid) {
+	if (row >= 0 && row < grid.length && col >= 0 && col < grid[0].length && grid[row][col] > 0) {
+	    return 1;
+	} else {
+	    return 0;
+	}
+    }
     public static void main(String[] args)throws FileNotFoundException {
 	System.out.println(bronze("makeLake.txt"));
     }
