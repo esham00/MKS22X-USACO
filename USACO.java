@@ -42,9 +42,21 @@ public class USACO {
 	}
 	public void solve(int instruction) {
 	    if (instruction < N) {
+		System.out.println(toString());
+		int max = 0;
+		int num = grounds[R_s][C_s];
 		for(int i = 0; i < 3; i++) {
 		    for(int j = 0; j < 3; j++) {
-			grounds[R_s+i][C_s+j] -= D_s;
+			if (max < grounds[R_s+i][C_s+j]) {
+			    max = grounds[R_s+i][C_s+j];
+			}
+		    }
+		}
+		for(int i = 0; i < 3; i++) {
+		    for(int j = 0; j < 3; j++) {
+			if (max - grounds[R_s+i][C_s+j]<= D_s) {
+			    grounds[R_s+i][C_s +j] = max-D_s;
+			}
 		    }
 		}
 		System.out.println(toString());
@@ -56,7 +68,8 @@ public class USACO {
 	    int summation = 0;
 	    for(int i = 0; i < grounds.length; i++) {
 		for(int j = 0; j < grounds[0].length; j++) {
-		    grounds[i][j] = grounds[i][j]*-1 + E;
+		    grounds[i][j] = (grounds[i][j]*-1) + E;
+		    //System.out.println(toString());
 		    if (grounds[i][j] > 0) {
 			summation += grounds[i][j];
 		    }
