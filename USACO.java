@@ -20,28 +20,34 @@ public class USACO {
     			grounds[i][j] = grid.nextInt();
     		    }
     		}
-    		R_s = grid.nextInt();
-    		C_s = grid.nextInt();
+		R_s = grid.nextInt()-1;
+    		C_s = grid.nextInt()-1;
     		D_s = grid.nextInt();
     	    } catch (Exception e) {
     		e.printStackTrace();
     	    }
     	}
 	public void nextMove() {
-	    if (grid.hasNextLine()) {
-		R_s = grid.nextInt();
-		C_s = grid.nextInt();
+	    if (grid.hasNextInt()) {
+		// System.out.println(grid.nextInt());
+		// System.out.println(grid.nextInt());
+		// System.out.println(grid.nextInt());
+		R_s = grid.nextInt()-1;
+		C_s = grid.nextInt()-1;
 		D_s = grid.nextInt();
+		// System.out.println(R_s);
+		// System.out.println(C_s);
+		// System.out.println(D_s);
 	    }
 	}
 	public void solve(int instruction) {
-	    if (instruction < instruction) {
-		System.out.println(grounds);
+	    if (instruction < N) {
 		for(int i = 0; i < 3; i++) {
-		    grounds[R_s+i][C_s] -= D_s;
-		    grounds[R_s+i][C_s+i] -= D_s;
-		    grounds[R_s][C_s+i] -= D_s;
+		    for(int j = 0; j < 3; j++) {
+			grounds[R_s+i][C_s+j] -= D_s;
+		    }
 		}
+		System.out.println(toString());
 		nextMove();
 		solve(instruction+1);
 	    }
@@ -50,7 +56,7 @@ public class USACO {
 	    int summation = 0;
 	    for(int i = 0; i < grounds.length; i++) {
 		for(int j = 0; j < grounds[0].length; j++) {
-		    grounds[i][j] -= E;
+		    grounds[i][j] = grounds[i][j]*-1 + E;
 		    if (grounds[i][j] > 0) {
 			summation += grounds[i][j];
 		    }
