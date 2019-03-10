@@ -1,7 +1,7 @@
 import java.util.*;
 import java.io.*;
 public class USACO {
-    private class Bronzee {
+    private static class Bronzee {
     	private int R, C, E, N, R_s, C_s, D_s;
     	private int[][] grounds;
     	private Scanner grid;
@@ -36,7 +36,7 @@ public class USACO {
 	}
 	public void solve(int instruction) {
 	    if (instruction < instruction) {
-		toString();
+		System.out.println(grounds);
 		for(int i = 0; i < 3; i++) {
 		    grounds[R_s+i][C_s] -= D_s;
 		    grounds[R_s+i][C_s+i] -= D_s;
@@ -56,7 +56,7 @@ public class USACO {
 		    }
 		}
 	    }
-	    return summation*R*12*C*12;
+	    return summation*72*72;
 	}
 	//    public int row() {
 	// 	return R_s;
@@ -80,10 +80,9 @@ public class USACO {
 	}
     }
     public static int bronze(String filename) throws FileNotFoundException {
-	String b = filename;
-	Bronzee a = new Bronzee(b);
-	a.solve(0);
-	return a.volume();
+	Bronzee blank = new Bronzee(filename);
+	blank.solve(0);
+	return blank.volume();
     }
 
     public static void main(String[] args)throws FileNotFoundException {
