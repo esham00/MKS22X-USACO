@@ -85,8 +85,9 @@ public class USACO {
 	blank.solve(0);
 	return blank.volume();
     }
-    public static int silver(String filename) {
-        int[] possibleX = {0,0,-1,1};
+    public static int silver(String filename) throws FileNotFoundException{
+	try {
+	int[] possibleX = {0,0,-1,1};
 	int[] possibleY = {1,-1,0,0};
 	File f = new File(filename);
 	Scanner g = new Scanner(f);
@@ -96,32 +97,50 @@ public class USACO {
 	int[][] grid = new int[N][M];
 	for(int i = 0; i < N; i++) {
 	    for(int j = 0; j < M; j++) {
-		if (grid.next() == ".") {
+		if (g.next() == ".") {
 		    grid[i][j] = 1;
 		} else {
 		    grid[i][j] = -1;
 		}
 	    }
 	}
-	int count = 0;
-	R1 = grid.nextInt();
-	C1 = grid.nextInt();
-	R2 = grid.nextInt();
-	C2 = grid.nextInt();
+	int R1 = g.next()-1;
+	int C1 = g.next()-1;
+	int R2 = g.next()-1;
+	int C2 = g.next()-1;
 	for(int i = 0; i < T; i++) {
-	    for(int j = 0; j < possibleMoves; j++
-	    count += check(R1,C1,grid);
+	    int[][]gridz = grid;
+	    for(int x = 0; x <  grid.length; x++) {
+		for(int y = 0; y < grid[0].length; y++) {
+		    int count = 0;
+		    for(int z = 0; z < 4; z++) {
+			int row = x + possibleX[z];
+			int col = y + possibleY[z];
+			if (check(row,col,grid)) {
+			    count += grid[row][col];
+			}
+		    }
+		    gridz[x][y] = count;
+		}
+	    }
+	    grid = gridz;
 	}
+	return grid[R2][C2];
+	} catch (Exception e) {
+	    e.printStackTrace();
+	}
+	return 0;
     }
-    public int check(int row, int col, int[][] grid) {
+    public static boolean check(int row, int col, int[][] grid) {
 	if (row >= 0 && row < grid.length && col >= 0 && col < grid[0].length && grid[row][col] > 0) {
-	    return 1;
+	    return true;
 	} else {
-	    return 0;
+	    return false;
 	}
     }
     public static void main(String[] args)throws FileNotFoundException {
 	System.out.println(bronze("makeLake.txt"));
+	System.out.println(silver("silverTest.txt"));
     }
 }
 	
