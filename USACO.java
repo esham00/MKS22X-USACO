@@ -115,20 +115,24 @@ public class USACO {
 	    int[][]gridz = new int[N][M];
 	    for(int x = 0; x <  grid.length; x++) {
 		for(int y = 0; y < grid[0].length; y++) {
-		    int count = 0;
-		    for(int z = 0; z < 4; z++) {
-			int row = x + possibleX[z];
-			int col = y + possibleY[z];
-			if (check(row,col,grid)) {
-			    count += grid[row][col];
+		    if (grid[x][y] == -1) {
+			gridz[x][y] = -1;
+		    } else {
+			int count = 0;
+			for(int z = 0; z < 4; z++) {
+			    int row = x + possibleX[z];
+			    int col = y + possibleY[z];
+			    if (check(row,col,grid)) {
+				count += grid[row][col];
+			    }
 			}
+			gridz[x][y] = count;
 		    }
-		    gridz[x][y] = count;
 		}
 	    }
 	    grid = gridz;
 	}
-	return grid[R2][C2];
+	return grid[R1][C1];
 	} catch (Exception e) {
 	    e.printStackTrace();
 	}
@@ -146,7 +150,7 @@ public class USACO {
     }
 	       
     public static boolean check(int row, int col, int[][] grid) {
-	if (row >= 0 && row < grid.length && col >= 0 && col < grid[0].length && grid[row][col] >= 0) {
+	if (row >= 0 && row < grid.length && col >= 0 && col < grid[0].length && grid[row][col] == 0) {
 	    return true;
 	} else {
 	    return false;
