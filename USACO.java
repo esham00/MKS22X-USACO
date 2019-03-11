@@ -96,20 +96,23 @@ public class USACO {
 	int T = g.nextInt();
 	int[][] grid = new int[N][M];
 	for(int i = 0; i < N; i++) {
+	    String x = g.next();
 	    for(int j = 0; j < M; j++) {
-		if (g.next() == ".") {
-		    grid[i][j] = 1;
+		if (x.charAt(j) == '.') {
+		    grid[i][j] = 0;
 		} else {
 		    grid[i][j] = -1;
 		}
 	    }
 	}
-	int R1 = g.next()-1;
-	int C1 = g.next()-1;
-	int R2 = g.next()-1;
-	int C2 = g.next()-1;
+	//	System.out.println(toString(grid));
+	int R1 = g.nextInt()-1;
+	int C1 = g.nextInt()-1;
+	int R2 = g.nextInt()-1;
+	int C2 = g.nextInt()-1;
+	grid[R1][C1] = 1;
 	for(int i = 0; i < T; i++) {
-	    int[][]gridz = grid;
+	    int[][]gridz = new int[N][M];
 	    for(int x = 0; x <  grid.length; x++) {
 		for(int y = 0; y < grid[0].length; y++) {
 		    int count = 0;
@@ -131,8 +134,19 @@ public class USACO {
 	}
 	return 0;
     }
+    public static String toString(int[][] grid) {
+	String output = "";
+	for(int i  = 0; i < grid.length;i++) {
+	    for(int j = 0; j< grid[0].length;j++) {
+		output += grid[i][j];
+	    }
+	    output += "\n";
+	}
+	return output;
+    }
+	       
     public static boolean check(int row, int col, int[][] grid) {
-	if (row >= 0 && row < grid.length && col >= 0 && col < grid[0].length && grid[row][col] > 0) {
+	if (row >= 0 && row < grid.length && col >= 0 && col < grid[0].length && grid[row][col] >= 0) {
 	    return true;
 	} else {
 	    return false;
